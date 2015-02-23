@@ -1,0 +1,52 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+  config.vm.communicator = "winrm"
+  config.windows.set_work_network = true
+  config.vm.box = "blomma/windows8_x64_fusion_base"
+  config.vm.box_check_update = true
+
+  config.vm.define "dev" do |dev|
+      dev.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+
+      dev.vm.network "private_network", ip: "10.0.0.11"
+
+      dev.vm.hostname = "dev"
+
+      dev.vm.provision :shell, path: "scripts/dev/Set-License-Key.ps1"
+      dev.vm.provision :shell, path: "../scripts/Install-Chocolatey.ps1"
+      dev.vm.provision :shell, path: "scripts/dev/Install-Apps.ps1"
+      dev.vm.provision :shell, path: "scripts/dev/Add-VPN.ps1"
+
+      dev.vm.provider "vmware_fusion" do |provider|
+          provider.name = "dev"
+          provider.gui = true
+          provider.vmx['memsize'] = 4096
+          provider.vmx['numvcpus'] = 1
+      end
+  end
+
+  config.vm.define "db" do |db|
+      db.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+
+      db.vm.network "private_network", ip: "10.0.0.10"
+
+      db.vm.hostname = "db"
+
+      db.vm.provision :shell, path: "scripts/db/Set-License-Key.ps1"
+      db.vm.provision :shell, path: "../scripts/Install-Chocolatey.ps1"
+      db.vm.provision :shell, path: "scripts/db/Install-Apps.ps1"
+
+      db.vm.provider "vmware_fusion" do |provider|
+          provider.name = "db"
+          provider.gui = false
+          provider.vmx['memsize'] = 2048
+          provider.vmx['numvcpus'] = 1
+      end
+  end
+end
