@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
       db.vm.provider "vmware_fusion" do |provider|
           provider.name = "db"
           provider.gui = false
-          provider.vmx['memsize'] = 2048
+          provider.vmx['memsize'] = 4096
           provider.vmx['numvcpus'] = 1
       end
   end
