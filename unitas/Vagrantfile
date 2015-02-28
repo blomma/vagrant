@@ -8,7 +8,7 @@
 Vagrant.configure(2) do |config|
   config.vm.communicator = "winrm"
   config.windows.set_work_network = true
-  config.vm.box = "blomma/windows8_x64_fusion_base"
+  config.vm.box = "blomma/windows8_x64_base"
   config.vm.box_check_update = true
 
   config.vm.define "dev" do |dev|
@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
       dev.vm.provision :shell, path: "scripts/dev/Set-License-Key.ps1"
       dev.vm.provision :shell, path: "../scripts/Install-Chocolatey.ps1"
       dev.vm.provision :shell, path: "../scripts/dev/Install-Apps.ps1"
+      dev.vm.provision :shell, path: "../scripts/dev/Path.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Install-Apps.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Add-VPN.ps1"
 

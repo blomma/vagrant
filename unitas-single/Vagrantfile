@@ -8,7 +8,7 @@
 Vagrant.configure(2) do |config|
   config.vm.communicator = "winrm"
   config.windows.set_work_network = true
-  config.vm.box = "blomma/windows8_x64_fusion_base"
+  config.vm.box = "blomma/windows8_x64_base"
   config.vm.box_check_update = true
 
   config.vm.define "dev" do |dev|

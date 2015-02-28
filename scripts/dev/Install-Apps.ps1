@@ -5,7 +5,6 @@ cinst -y vs2013.4
 cinst -y resharper
 cinst -y linqpad
 cinst -y notepadplusplus.install
-# cinst -y git.install
 
 # Install extensions
 wget https://visualstudiogallery.msdn.microsoft.com/2e8ebfe4-023f-4c4d-9b7a-d05bbc5cb239/file/117003/20/VSWindowTitleChanger.vsix -OutFile c:\Users\vagrant\VSWindowTitleChanger.vsix
