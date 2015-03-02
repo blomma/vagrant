@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
       dev.vm.provision :shell, path: "../scripts/dev/Install-Apps.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Install-Apps.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Add-VPN.ps1"
+      dev.vm.provision :shell, path: "../scripts/dev/Path.ps1"
 
       dev.vm.provider "vmware_fusion" do |provider|
           provider.name = "dev"
