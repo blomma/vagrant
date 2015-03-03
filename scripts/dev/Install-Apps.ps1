@@ -1,8 +1,7 @@
-cinst GoogleChrome
+cinst -y GoogleChrome
 cinst -y visualstudio2013premium -InstallArguments "/Features:'WebTools'"
 cinst -y vs2013.4
-#cinst resharper -Version 8.2.3000.5176
-cinst -y resharper
+cinst -y resharper -Version 8.2.3000.5176
 cinst -y linqpad
 cinst -y notepadplusplus.install
 
