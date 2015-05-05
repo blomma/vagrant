@@ -45,8 +45,6 @@ Vagrant.configure(2) do |config|
           provider.vmx['hgfs.redirectShellFolder0.name'] = "downloads"
           provider.vmx['hgfs.redirectShellFolder0.enabled'] = "TRUE"
           provider.vmx['hgfs.redirectShellFolder.maxNum'] = "1"
-
-          provider.vmx['numvcpus'] = 2
       end
   end
 
