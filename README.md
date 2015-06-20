@@ -37,7 +37,7 @@ Its possible there is unallocated space on disk with data remaining that can hin
 ```
 wget http://download.sysinternals.com/files/SDelete.zip -OutFile sdelete.zip
 [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
-[System.IO.Compression.ZipFile]::ExtractToDirectory("sdelete.zip", ".") 
+[System.IO.Compression.ZipFile]::ExtractToDirectory("sdelete.zip", ".")
 ./sdelete.exe -z c:
 ```
 
