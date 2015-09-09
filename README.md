@@ -1,5 +1,14 @@
 # Things todo on update of basebox
 
+```
+winrm quickconfig -q
+winrm set winrm/config/winrs @{MaxMemoryPerShellMB="512"}
+winrm set winrm/config @{MaxTimeoutms="14400000"}
+winrm set winrm/config/service @{AllowUnencrypted="true"}
+winrm set winrm/config/service/auth @{Basic="true"}
+sc config WinRM start= auto
+```
+
 ## Cleanup WinSXS update debris
 
 Now that we have installed those updates there are gigabytes (not many but enough) of backup and rollback files lying on disk that we dont care about. We are not concerned with uninstalling any of the updates. New in windows 8.1/2012 R2 (and back ported to win 7/2008R2) there is a command that will get rid of all of this unneeded data:

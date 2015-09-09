@@ -18,52 +18,17 @@ Vagrant.configure(2) do |config|
 
       dev.vm.hostname = "dev"
 
-      dev.vm.synced_folder "~/Dropbox", "/Dropbox"
-
       dev.vm.provision :shell, path: "scripts/dev/Set-License-Key.ps1"
       dev.vm.provision :shell, path: "../scripts/Install-Chocolatey.ps1"
       dev.vm.provision :shell, path: "../scripts/dev/Install-Apps.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Install-Apps.ps1"
       dev.vm.provision :shell, path: "scripts/dev/Add-VPN.ps1"
-      dev.vm.provision :shell, path: "../scripts/dev/Path.ps1"
 
       dev.vm.provider "vmware_fusion" do |provider|
           provider.name = "dev"
           provider.gui = true
           provider.vmx['memsize'] = 8192
           provider.vmx['numvcpus'] = 2
-
-          provider.vmx['sharedFolder0.present'] = "TRUE"
-          provider.vmx['sharedFolder0.enabled'] = "TRUE"
-          provider.vmx['sharedFolder0.readAccess'] = "TRUE"
-          provider.vmx['sharedFolder0.writeAccess'] = "TRUE"
-          provider.vmx['sharedFolder0.hostPath'] = "/Users/blomma/Downloads"
-          provider.vmx['sharedFolder0.guestName'] = "Downloads"
-          provider.vmx['sharedFolder0.expiration'] = "never"
-          provider.vmx['sharedFolder0.shareTags'] = "auto,downloads"
-          provider.vmx['sharedFolder.maxNum'] = "1"
-          provider.vmx['hgfs.redirectShellFolder0.name'] = "downloads"
-          provider.vmx['hgfs.redirectShellFolder0.enabled'] = "TRUE"
-          provider.vmx['hgfs.redirectShellFolder.maxNum'] = "1"
-      end
-  end
-
-  config.vm.define "db" do |db|
-      db.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
-
-      db.vm.network "private_network", ip: "10.0.0.10"
-
-      db.vm.hostname = "db"
-
-      db.vm.provision :shell, path: "scripts/db/Set-License-Key.ps1"
-      db.vm.provision :shell, path: "../scripts/Install-Chocolatey.ps1"
-      db.vm.provision :shell, path: "scripts/db/Install-Apps.ps1"
-
-      db.vm.provider "vmware_fusion" do |provider|
-          provider.name = "db"
-          provider.gui = false
-          provider.vmx['memsize'] = 4096
-          provider.vmx['numvcpus'] = 1
       end
   end
 end
